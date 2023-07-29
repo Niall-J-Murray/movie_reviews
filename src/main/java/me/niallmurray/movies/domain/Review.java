@@ -1,6 +1,9 @@
 package me.niallmurray.movies.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.*;
 
 @Getter
@@ -13,8 +16,12 @@ import lombok.*;
 public class Review {
   @Id
   @GeneratedValue
-//  @ManyToOne
-//  @JoinColumn(name="movieId", nullable=false)
   private Long id;
+  private String imdbId;
   private String body;
+
+  public Review(String imdbId, String reviewBody) {
+    this.imdbId = imdbId;
+    this.body = reviewBody;
+  }
 }

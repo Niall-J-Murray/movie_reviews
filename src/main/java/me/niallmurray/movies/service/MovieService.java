@@ -1,6 +1,7 @@
 package me.niallmurray.movies.service;
 
 import me.niallmurray.movies.domain.Movie;
+import me.niallmurray.movies.domain.Review;
 import me.niallmurray.movies.repositories.MovieRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,13 @@ public class MovieService {
 
   public Optional<Movie> findMovieByImdbId(String imdbId) {
     return movieRepo.findMovieByImdbId(imdbId);
+  }
+
+  public void addReview(String imdbId, Review review) {
+    Optional<Movie> movie = findMovieByImdbId(imdbId);
+    if (movie.isPresent()) {
+      movie.get().getReviewIds().add(review);
+      movieRepo.save(movie.get());
+    }
   }
 }
