@@ -23,10 +23,10 @@ public class ReviewService {
     return reviewRepo.findById(id);
   }
 
-  public Review createReview(String imdbId, String reviewBody) {
+  public Review createReview(String id, String imdbId, String reviewBody) {
     Review review = new Review(imdbId, reviewBody);
     reviewRepo.save(review);
-
+    System.out.println(review.getId());
     movieService.addReview(imdbId, review);
     return review;
   }
